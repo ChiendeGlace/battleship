@@ -1,60 +1,51 @@
-import playerFactory from './player';
-import computerFactory from './computer';
-import gameboardFactory from './gameboard';
+import updatePlayerBoard from './updatePlayerBoard';
+import updateComputerBoard from './updateComputerBoard';
 
-const startGame = (name) => {
-    const playerOne = playerFactory(name);
-    const playerBoard = gameboardFactory();
-    const computer = computerFactory();
-    const computerBoard = gameboardFactory();
-    playerOne.turn = true;
+const container = document.querySelector('.container');
+
+const startGame = async (player, computer, playerBoard, computerBoard) => {
     while (
         playerBoard.areAllSunk() == false &&
         computerBoard.areAllSunk() == false
     ) {
-        if (playerOne.turn) {
-            if (playerBoard.hit.length > 0) {
-                console.log(`You managed to hit: ${playerBoard.hit}`);
-            }
-            if (playerBoard.missed.length > 0) {
-                console.log(`You missed at: ${playerBoard.missed}`);
-            }
-            const cords = prompt(`It's now your time to hit`);
-            while (
-                computerBoard.recieveAttack(cords) == 'No such cords' ||
-                computerBoard.recieveAttack(cords) == 'Square already attacked'
-            ) {
-                cords = prompt(`It's now your time to hit`);
-            }
-            computerBoard.recieveAttack(cords);
-            console.log(computerBoard.recieveAttack(cords));
-            playerOne.turn = false;
+        if (player.turn) {
+            let userMove = await getUserMove();
+            computerBoard.recieveAttack(userMove);
+            container.textContent = '';
+            container.appendChild(updatePlayerBoard(playerBoard));
+            container.appendChild(
+                updateComputerBoard(computerBoard, computer, player)
+            );
+            player.turn = false;
             computer.turn = true;
         } else if (computer.turn) {
             let possibleCords = [];
             for (let i = 0; i < 100; i++) {
                 if (
-                    playerBoard[i].isHit == false &&
-                    playerBoard[i].isMissed == false
+                    playerBoard.board[i].isHit == false &&
+                    playerBoard.board[i].isMissed == false
                 ) {
                     possibleCords.push(i);
                 }
             }
             let randomCords = Math.floor(Math.random() * possibleCords.length);
             playerBoard.recieveAttack(randomCords);
-            if (
-                playerBoard.recieveAttack(randomCords) ==
-                `You managed to hit a ship on square ${randomCords}`
-            ) {
-                console.log(`It's a hit`);
-            } else {
-                console.log(`It's a miss`);
-            }
-            playerOne.turn = true;
+            container.textContent = '';
+            container.appendChild(updatePlayerBoard(playerBoard));
+            container.appendChild(
+                updateComputerBoard(computerBoard, computer, player)
+            );
+            player.turn = true;
             computer.turn = false;
         }
-        if (playerBoard.areAllSunk()) return 'Computer won';
-        if (computerBoard.areAllSunk()) return 'Player won';
+        if (playerBoard.areAllSunk()) {
+            console.log('Computer won!');
+            return;
+        }
+        if (computerBoard.areAllSunk()) {
+            console.log('Player won!');
+            return 'Player won';
+        }
     }
 };
 

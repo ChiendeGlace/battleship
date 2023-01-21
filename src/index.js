@@ -1,3 +1,3 @@
-import startGame from "./modules/game"
+import displayGame from './modules/displayGame';
 
-startGame('Simon');
+displayGame();
