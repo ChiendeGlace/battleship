@@ -1,0 +1,18 @@
+header {
+    padding: 4em 3em;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    h1 {
+        font-size: 3rem;
+        color: white;
+    }
+    div {
+        background-color: gray;
+        position: absolute;
+        text-align: center;
+        padding: 1em 2em;
+        cursor: pointer;
+        right: 3em;
+    }
+}

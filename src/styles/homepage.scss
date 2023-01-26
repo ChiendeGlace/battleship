@@ -1,0 +1,46 @@
+.info {
+    display: flex;
+    width: 50em;
+    margin-inline: auto;
+    form {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+        label {
+            font-size: 1.5rem;
+            color: white;
+        }
+        input {
+            font-size: 16px;
+            padding: 0.25em 1em;
+            outline: none;
+        }
+        button {
+            font-size: 16px;
+            padding: 0.25em 1em;
+        }
+    }
+    div {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        color: white;
+        gap: 16px;
+        h3 {
+            font-size: 1.5rem;
+        }
+        .game-info {
+            display: flex;
+            justify-content: center;
+        }
+        .player-info {
+            flex-basis: 20%;
+        }
+        .computer-info {
+            flex-basis: 20%;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}

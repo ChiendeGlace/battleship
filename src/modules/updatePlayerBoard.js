@@ -1,10 +1,11 @@
 const updatePlayerBoard = (playerBoard) => {
     const playerBoardInterface = document.createElement('div');
+    playerBoardInterface.classList.add('player-board');
     for (let i = 0; i < 100; i++) {
         let square = document.createElement('div');
         square.style.width = '30px';
         square.style.height = '30px';
-        square.style.border = '1px solid black';
+        square.style.border = '2px solid white';
         square.classList.add('square');
         if (playerBoard.board[i].hasShip) {
             square.textContent = 'ship';
