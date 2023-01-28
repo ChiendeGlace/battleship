@@ -7,6 +7,7 @@ const updatePlayerBoard = (playerBoard) => {
         square.style.height = '30px';
         square.style.border = '2px solid white';
         square.classList.add('square');
+        square.setAttribute('id', `player${i}`);
         if (playerBoard.board[i].hasShip) {
             square.textContent = 'ship';
         }

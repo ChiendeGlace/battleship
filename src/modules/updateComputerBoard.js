@@ -3,6 +3,8 @@ const updateComputerBoard = (computerBoard, computer, player) => {
     computerBoardInterface.classList.add('computer-board');
     for (let i = 0; i < 100; i++) {
         let square = document.createElement('div');
+        let icon = document.createElement('i');
+        square.appendChild(icon);
         square.style.width = '30px';
         square.style.height = '30px';
         square.style.border = '2px solid white';

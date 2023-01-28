@@ -12,7 +12,7 @@ const updateInformation = (playerName, playerBoard, computerBoard, message) => {
             pShipsCount += 1;
         }
     }
-    //pShipsLeft.textContent = 'Ships left: ' + pShipsCount;
+    pShipsLeft.textContent = 'Ships left: ' + pShipsCount;
     const pName = document.createElement('h3');
     pName.textContent = playerName;
     playerInfo.append(pName, pShipsLeft);
@@ -28,7 +28,7 @@ const updateInformation = (playerName, playerBoard, computerBoard, message) => {
             cShipsCount += 1;
         }
     }
-    //cShipsLeft.textContent = 'Ships left: ' + cShipsCount;
+    cShipsLeft.textContent = 'Ships left: ' + cShipsCount;
     const cName = document.createElement('h3');
     cName.textContent = 'Computer';
     computerInfo.append(cName, cShipsLeft);

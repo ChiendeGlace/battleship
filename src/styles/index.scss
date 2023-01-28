@@ -1,3 +1,8 @@
 @forward './board.scss';
 @forward './header.scss';
 @forward './homepage.scss';
+
+.container {
+    display: flex;
+    flex-direction: column;
+}

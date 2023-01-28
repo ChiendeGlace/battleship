@@ -17,24 +17,23 @@ const toHomepage = () => {
     gameInterface.textContent = '';
     header.appendChild(createHeader());
     gameInfo.appendChild(createHomepage());
-}
+};
 
-const displayGame = (playerName) => {
+const displayGame = (playerName, playerBoard) => {
     const goBackButton = document.createElement('div');
     goBackButton.textContent = 'To main menu';
     header.appendChild(goBackButton);
     goBackButton.addEventListener('click', toHomepage);
     const player = playerFactory(playerName);
-    const playerBoard = gameboardFactory();
     const computer = computerFactory();
     const computerBoard = gameboardFactory();
     player.turn = true;
-    playerBoard.placeShips(10);
-    playerBoard.placeShips(15);
-    playerBoard.placeShips(20);
     computerBoard.placeShips(35);
     computerBoard.placeShips(40);
     computerBoard.placeShips(55);
+    gameInterface.textContent = '';
+    gameInfo.classList.remove('homepage-info');
+    gameInterface.classList.remove('homepage-board');
     gameInterface.appendChild(updatePlayerBoard(playerBoard));
     gameInterface.appendChild(
         updateComputerBoard(computerBoard, computer, player)

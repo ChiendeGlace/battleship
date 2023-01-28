@@ -2,6 +2,7 @@
     display: flex;
     width: 50em;
     margin-inline: auto;
+    justify-content: center;
     form {
         display: flex;
         flex-direction: column;
@@ -30,17 +31,29 @@
         h3 {
             font-size: 1.5rem;
         }
+        p {
+            font-size: 16px;
+        }
         .game-info {
             display: flex;
             justify-content: center;
         }
         .player-info {
+            gap: 4px;
+            display: flex;
+            flex-direction: column;
             flex-basis: 20%;
         }
         .computer-info {
+            gap: 4px;
+            align-items: flex-end;
+            flex-direction: column;
             flex-basis: 20%;
             display: flex;
-            justify-content: flex-end;
         }
     }
+}
+
+.homepage-info {
+    order: 2;
 }
