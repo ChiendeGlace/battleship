@@ -16,7 +16,7 @@ const toHomepage = () => {
     gameInfo.textContent = '';
     gameInterface.textContent = '';
     header.appendChild(createHeader());
-    gameInfo.appendChild(createHomepage());
+    createHomepage();
 };
 
 const displayGame = (playerName, playerBoard) => {
