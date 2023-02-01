@@ -2,6 +2,15 @@ import updatePlayerBoard from './updatePlayerBoard';
 import updateComputerBoard from './updateComputerBoard';
 import updateInformation from './info';
 
+let gameStatus = 0;
+export const changeGameStatus = () => {
+    if (gameStatus == 0) {
+        gameStatus = 1;
+    } else {
+        gameStatus = 0;
+    }
+};
+
 const getUserMove = (computerBoard) => {
     return new Promise(function (resolve, reject) {
         for (let i = 0; i < 100; i++) {
@@ -21,7 +30,12 @@ const getUserMove = (computerBoard) => {
 const gameInterface = document.querySelector('.game-interface');
 const gameInfo = document.querySelector('.info');
 
-const startGame = async (player, computer, playerBoard, computerBoard) => {
+export const startGame = async (
+    player,
+    computer,
+    playerBoard,
+    computerBoard
+) => {
     while (
         playerBoard.areAllSunk() == false &&
         computerBoard.areAllSunk() == false
@@ -37,6 +51,9 @@ const startGame = async (player, computer, playerBoard, computerBoard) => {
                 )
             );
             let userMove = await getUserMove(computerBoard);
+            if (gameStatus == 0) {
+                return;
+            }
             gameInfo.textContent = '';
             gameInterface.textContent = '';
             let result = computerBoard.recieveAttack(userMove);
@@ -107,6 +124,9 @@ const startGame = async (player, computer, playerBoard, computerBoard) => {
             };
             let randomCords = await getRandomCords();
             let result = playerBoard.recieveAttack(randomCords);
+            if (gameStatus == 0) {
+                return;
+            }
             gameInfo.textContent = '';
             gameInterface.textContent = '';
             if (result == 'You missed') {
@@ -173,5 +193,3 @@ const startGame = async (player, computer, playerBoard, computerBoard) => {
         }
     }
 };
-
-export default startGame;

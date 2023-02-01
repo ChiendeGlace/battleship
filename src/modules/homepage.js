@@ -24,13 +24,34 @@ const createHomepage = async () => {
     gameInfo.classList.add('homepage-info');
     gameInterface.classList.add('homepage-board');
 
+    const countShips = () => {
+        let shipCount = 0;
+        for (let i = 0; i < 100; i++) {
+            if (playerBoard.board[i].hasShip) {
+                shipCount += 1;
+            }
+        }
+        return shipCount;
+    };
+
     const changeDirection = async (e) => {
         if (direction == 'vertical') {
             direction = 'horizontal';
-            carrierCords = await placeShipHomepage(playerBoard, 5, direction);
         } else {
             direction = 'vertical';
+        }
+        if (carrierCords == undefined) {
             carrierCords = await placeShipHomepage(playerBoard, 5, direction);
+        } else if (battleshipCords == undefined) {
+            battleshipCords = await placeShipHomepage(
+                playerBoard,
+                4,
+                direction
+            );
+        } else if (cruiserCords == undefined || countShips() < 18) {
+            cruiserCords = await placeShipHomepage(playerBoard, 3, direction);
+        } else {
+            destroyerCords = await placeShipHomepage(playerBoard, 2, direction);
         }
     };
     directionChange.addEventListener('click', changeDirection);
@@ -40,10 +61,17 @@ const createHomepage = async () => {
     gameInterface.appendChild(updatePlayerBoard(playerBoard));
     let carrierCords = await placeShipHomepage(playerBoard, 5, direction);
     playerBoard.placeShips(carrierCords);
-    playerBoard.placeShips(carrierCords + 10);
-    playerBoard.placeShips(carrierCords + 20);
-    playerBoard.placeShips(carrierCords + 30);
-    playerBoard.placeShips(carrierCords + 40);
+    if (direction == 'vertical') {
+        playerBoard.placeShips(carrierCords + 10);
+        playerBoard.placeShips(carrierCords + 20);
+        playerBoard.placeShips(carrierCords + 30);
+        playerBoard.placeShips(carrierCords + 40);
+    } else {
+        playerBoard.placeShips(carrierCords + 1);
+        playerBoard.placeShips(carrierCords + 2);
+        playerBoard.placeShips(carrierCords + 3);
+        playerBoard.placeShips(carrierCords + 4);
+    }
     gameInterface.textContent = '';
     gameInterface.append(shipPlacementGuide, directionChange);
     gameInterface.appendChild(updatePlayerBoard(playerBoard));
@@ -51,28 +79,46 @@ const createHomepage = async () => {
     shipPlacementGuide.textContent = 'Place your battleship';
     let battleshipCords = await placeShipHomepage(playerBoard, 4, direction);
     playerBoard.placeShips(battleshipCords);
-    playerBoard.placeShips(battleshipCords + 10);
-    playerBoard.placeShips(battleshipCords + 20);
-    playerBoard.placeShips(battleshipCords + 30);
+    if (direction == 'vertical') {
+        playerBoard.placeShips(battleshipCords + 10);
+        playerBoard.placeShips(battleshipCords + 20);
+        playerBoard.placeShips(battleshipCords + 30);
+    } else {
+        playerBoard.placeShips(battleshipCords + 1);
+        playerBoard.placeShips(battleshipCords + 2);
+        playerBoard.placeShips(battleshipCords + 3);
+    }
     gameInterface.textContent = '';
     gameInterface.append(shipPlacementGuide, directionChange);
     gameInterface.appendChild(updatePlayerBoard(playerBoard));
 
+    let cruiserCords;
     for (let i = 0; i < 3; i++) {
+        cruiserCords = undefined;
         shipPlacementGuide.textContent = 'Place your cruisers';
-        let cruiserCords = await placeShipHomepage(playerBoard, 3, direction);
+        cruiserCords = await placeShipHomepage(playerBoard, 3, direction);
         playerBoard.placeShips(cruiserCords);
-        playerBoard.placeShips(cruiserCords + 10);
-        playerBoard.placeShips(cruiserCords + 20);
+        if (direction == 'vertical') {
+            playerBoard.placeShips(cruiserCords + 10);
+            playerBoard.placeShips(cruiserCords + 20);
+        } else {
+            playerBoard.placeShips(cruiserCords + 1);
+            playerBoard.placeShips(cruiserCords + 2);
+        }
         gameInterface.textContent = '';
         gameInterface.append(shipPlacementGuide, directionChange);
         gameInterface.appendChild(updatePlayerBoard(playerBoard));
     }
+    let destroyerCords;
     for (let i = 0; i < 4; i++) {
         shipPlacementGuide.textContent = 'Place your destroyers';
-        let destroyerCords = await placeShipHomepage(playerBoard, 2, direction);
+        destroyerCords = await placeShipHomepage(playerBoard, 2, direction);
         playerBoard.placeShips(destroyerCords);
-        playerBoard.placeShips(destroyerCords + 10);
+        if (direction == 'vertical') {
+            playerBoard.placeShips(destroyerCords + 10);
+        } else {
+            playerBoard.placeShips(destroyerCords + 1);
+        }
         gameInterface.textContent = '';
         if (i !== 3) {
             gameInterface.append(shipPlacementGuide, directionChange);

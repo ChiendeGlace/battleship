@@ -1,6 +1,4 @@
 import { direction } from './homepage';
-const gameInterface = document.querySelector('.game-interface');
-const gameInfo = document.querySelector('.info');
 
 const placeShipHomepage = (playerBoard, length) => {
     return new Promise(function (resolve, reject) {

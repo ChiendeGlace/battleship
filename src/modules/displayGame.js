@@ -1,4 +1,4 @@
-import startGame from './game';
+import { changeGameStatus, startGame } from './game';
 import createHeader from './header';
 import playerFactory from './player';
 import computerFactory from './computer';
@@ -12,6 +12,7 @@ const gameInfo = document.querySelector('.info');
 const header = document.querySelector('header');
 
 const toHomepage = () => {
+    changeGameStatus();
     header.textContent = '';
     gameInfo.textContent = '';
     gameInterface.textContent = '';
@@ -38,6 +39,7 @@ const displayGame = (playerName, playerBoard) => {
     gameInterface.appendChild(
         updateComputerBoard(computerBoard, computer, player)
     );
+    changeGameStatus();
     startGame(player, computer, playerBoard, computerBoard);
 };
 
