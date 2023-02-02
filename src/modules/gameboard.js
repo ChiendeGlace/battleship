@@ -3,7 +3,7 @@ const gameboardFactory = () => {
     const hit = [];
     const missed = [];
     for (let i = 0; i < 100; i++) {
-        board.push({ isHit: false, hasShip: false, isMissed: false });
+        board.push({ isHit: false, hasShip: false, isMissed: false, canHaveShip: true });
     }
     const placeShips = (cords) => {
         if (board[cords].hasShip == false) {

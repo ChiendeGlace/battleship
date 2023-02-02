@@ -4,7 +4,10 @@ const placeShipHomepage = (playerBoard, length) => {
     return new Promise(function (resolve, reject) {
         let shipDirection = direction;
         for (let i = 0; i < 100; i++) {
-            if (playerBoard.board[i].hasShip == false) {
+            if (
+                playerBoard.board[i].hasShip == false &&
+                playerBoard.board[i].canHaveShip == true
+            ) {
                 let square = document.getElementById(`player${i}`);
                 if (
                     shipDirection == 'vertical' &&
@@ -12,27 +15,40 @@ const placeShipHomepage = (playerBoard, length) => {
                 ) {
                     square.addEventListener('mouseover', (e) => {
                         if (direction !== shipDirection) {
+                            reject();
                             return;
                         }
-                        e.target.style.backgroundColor = 'red';
-                        for (let j = 0; j < length; j++) {
-                            let nextSquare = document.getElementById(
-                                `player${i + j * 10}`
-                            );
-                            nextSquare.style.backgroundColor = 'red';
+                        if (
+                            playerBoard.board[i + (length - 1) * 10].canHaveShip
+                        ) {
+                            e.target.style.backgroundColor = 'red';
+                            for (let j = 0; j < length; j++) {
+                                let nextSquare = document.getElementById(
+                                    `player${i + j * 10}`
+                                );
+                                nextSquare.style.backgroundColor = 'red';
+                            }
                         }
                     });
                     square.addEventListener('mouseleave', (e) => {
-                        e.target.style.backgroundColor = '#0369a1';
-                        for (let j = 0; j < length; j++) {
-                            let nextSquare = document.getElementById(
-                                `player${i + j * 10}`
-                            );
-                            nextSquare.style.backgroundColor = '#0369a1';
+                        if (
+                            playerBoard.board[i + (length - 1) * 10].canHaveShip
+                        ) {
+                            e.target.style.backgroundColor = '#0369a1';
+                            for (let j = 0; j < length; j++) {
+                                let nextSquare = document.getElementById(
+                                    `player${i + j * 10}`
+                                );
+                                nextSquare.style.backgroundColor = '#0369a1';
+                            }
                         }
                     });
                     square.addEventListener('click', (e) => {
-                        resolve(i);
+                        if (
+                            playerBoard.board[i + (length - 1) * 10].canHaveShip
+                        ) {
+                            resolve(i);
+                        }
                     });
                 }
                 if (
@@ -42,6 +58,7 @@ const placeShipHomepage = (playerBoard, length) => {
                     if ((i < 9 && i + length - 1 < 10) || i > 9) {
                         square.addEventListener('mouseover', (e) => {
                             if (direction !== shipDirection) {
+                                reject();
                                 return;
                             }
                             e.target.style.backgroundColor = 'red';

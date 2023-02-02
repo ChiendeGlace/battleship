@@ -9,13 +9,13 @@ const updatePlayerBoard = (playerBoard) => {
         square.classList.add('square');
         square.setAttribute('id', `player${i}`);
         if (playerBoard.board[i].hasShip) {
-            square.textContent = 'ship';
+            square.style.backgroundColor = 'blue';
         }
         if (playerBoard.board[i].isHit) {
-            square.textContent = 'hit';
+            square.style.backgroundColor = 'red';
         }
         if (playerBoard.board[i].isMissed) {
-            square.textContent = 'miss';
+            square.style.backgroundColor = 'lightgray';
         }
         playerBoardInterface.appendChild(square);
     }

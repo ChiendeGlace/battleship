@@ -3,6 +3,7 @@ import startGame from './game';
 import gameboardFactory from './gameboard';
 import updatePlayerBoard from './updatePlayerBoard';
 import placeShipHomepage from './placingShips';
+import { donotAllowShips } from './noAdjecent';
 
 export let direction = 'vertical';
 const gameInterface = document.querySelector('.game-interface');
@@ -66,6 +67,13 @@ const createHomepage = async () => {
         playerBoard.placeShips(carrierCords + 20);
         playerBoard.placeShips(carrierCords + 30);
         playerBoard.placeShips(carrierCords + 40);
+        donotAllowShips(
+            playerBoard,
+            carrierCords,
+            [-10, -9, -11, -1],
+            [0, 10, 20, 30, 40, 49, 50, 51, 39, 41, 29, 31, 19, 21, 11, 9, 1],
+            'vertical'
+        );
     } else {
         playerBoard.placeShips(carrierCords + 1);
         playerBoard.placeShips(carrierCords + 2);
@@ -83,6 +91,13 @@ const createHomepage = async () => {
         playerBoard.placeShips(battleshipCords + 10);
         playerBoard.placeShips(battleshipCords + 20);
         playerBoard.placeShips(battleshipCords + 30);
+        donotAllowShips(
+            playerBoard,
+            battleshipCords,
+            [-10, -9, -11, -1],
+            [0, 10, 20, 30, 40, 39, 41, 29, 31, 19, 21, 11, 9, 1],
+            'vertical'
+        );
     } else {
         playerBoard.placeShips(battleshipCords + 1);
         playerBoard.placeShips(battleshipCords + 2);
@@ -101,6 +116,13 @@ const createHomepage = async () => {
         if (direction == 'vertical') {
             playerBoard.placeShips(cruiserCords + 10);
             playerBoard.placeShips(cruiserCords + 20);
+            donotAllowShips(
+                playerBoard,
+                cruiserCords,
+                [-10, -9, -11, -1],
+                [0, 10, 20, 30, 29, 31, 19, 21, 11, 9, 1],
+                'vertical'
+            );
         } else {
             playerBoard.placeShips(cruiserCords + 1);
             playerBoard.placeShips(cruiserCords + 2);
@@ -116,6 +138,13 @@ const createHomepage = async () => {
         playerBoard.placeShips(destroyerCords);
         if (direction == 'vertical') {
             playerBoard.placeShips(destroyerCords + 10);
+            donotAllowShips(
+                playerBoard,
+                destroyerCords,
+                [-10, -9, -11, -1],
+                [0, 10, 20, 19, 21, 11, 9, 1],
+                'vertical'
+            );
         } else {
             playerBoard.placeShips(destroyerCords + 1);
         }
