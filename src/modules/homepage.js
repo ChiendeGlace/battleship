@@ -79,6 +79,14 @@ const createHomepage = async () => {
         playerBoard.placeShips(carrierCords + 2);
         playerBoard.placeShips(carrierCords + 3);
         playerBoard.placeShips(carrierCords + 4);
+        donotAllowShips(
+            playerBoard,
+            carrierCords,
+            [-1, -10, -11, -9, -8, -7, -6, -5],
+            [5, 9, 10, 11, 12, 13, 14, 15, 0, 1, 2, 3, 4],
+            'horizontal',
+            5
+        );
     }
     gameInterface.textContent = '';
     gameInterface.append(shipPlacementGuide, directionChange);
@@ -102,6 +110,13 @@ const createHomepage = async () => {
         playerBoard.placeShips(battleshipCords + 1);
         playerBoard.placeShips(battleshipCords + 2);
         playerBoard.placeShips(battleshipCords + 3);
+        donotAllowShips(
+            playerBoard,
+            battleshipCords,
+            [-1, -10, -11, -9, -8, -7, -6],
+            [4, 9, 10, 11, 12, 13, 14, 0, 1, 2, 3],
+            'horizontal'
+        );
     }
     gameInterface.textContent = '';
     gameInterface.append(shipPlacementGuide, directionChange);
@@ -126,6 +141,13 @@ const createHomepage = async () => {
         } else {
             playerBoard.placeShips(cruiserCords + 1);
             playerBoard.placeShips(cruiserCords + 2);
+            donotAllowShips(
+                playerBoard,
+                cruiserCords,
+                [-1, -10, -11, -9, -8, -7],
+                [9, 10, 11, 12, 13, 0, 1, 2, 3],
+                'horizontal'
+            );
         }
         gameInterface.textContent = '';
         gameInterface.append(shipPlacementGuide, directionChange);
@@ -147,6 +169,13 @@ const createHomepage = async () => {
             );
         } else {
             playerBoard.placeShips(destroyerCords + 1);
+            donotAllowShips(
+                playerBoard,
+                destroyerCords,
+                [-1, -10, -11, -9, -8],
+                [9, 10, 11, 12, 0, 1, 2],
+                'horizontal'
+            );
         }
         gameInterface.textContent = '';
         if (i !== 3) {
