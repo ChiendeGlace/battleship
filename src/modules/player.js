@@ -4,3 +4,4 @@ const playerFactory = (name) => {
 };
 
 export default playerFactory;
+         

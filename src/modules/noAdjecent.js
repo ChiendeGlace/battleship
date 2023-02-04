@@ -67,7 +67,6 @@ export const donotAllowShips = (
             index = cords + cordsPlus[i];
             if (index <= 99) {
                 if (cords == 0 || cords.toString().split('')[1] == 0) {
-                    console.log(0)
                     if (index.toString().split('')[1] < 9 || index < 9) {
                         playerBoard.board[index].canHaveShip = false;
                     }

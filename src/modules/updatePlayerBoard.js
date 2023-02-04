@@ -17,9 +17,6 @@ const updatePlayerBoard = (playerBoard) => {
         if (playerBoard.board[i].isMissed) {
             square.style.backgroundColor = 'lightgray';
         }
-        if (playerBoard.board[i].canHaveShip == false) {
-            square.textContent = 'PiS'
-        }
         playerBoardInterface.appendChild(square);
     }
     playerBoardInterface.style.display = 'grid';

@@ -16,12 +16,6 @@ const updateComputerBoard = (computerBoard, computer, player) => {
         if (computerBoard.board[i].isMissed) {
             square.textContent = 'miss';
         }
-        if (computerBoard.board[i].hasShip) {
-            square.style.backgroundColor = 'blue';
-        }
-        if (computerBoard.board[i].canHaveShip == false) {
-            square.textContent = 'PiS';
-        }
         computerBoardInterface.appendChild(square);
     }
     computerBoardInterface.style.display = 'grid';

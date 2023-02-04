@@ -6,7 +6,7 @@ import gameboardFactory from './gameboard';
 import updatePlayerBoard from './updatePlayerBoard';
 import updateComputerBoard from './updateComputerBoard';
 import createHomepage from './homepage';
-import { donotAllowShips } from './noAdjecent';
+import { placeShipsRandomly } from './computerShipPlacement';
 
 const gameInterface = document.querySelector('.game-interface');
 const gameInfo = document.querySelector('.info');
@@ -21,33 +21,6 @@ const toHomepage = () => {
     createHomepage();
 };
 
-const placeShipsRandomly = (cboard, length, direction) => {
-    let index;
-    const conditionsMet = (index) => {
-        for (let i = 0; i < length; i++) {
-            if (cboard.board[index + 1].canHaveShip == false) {
-                return false;
-            }
-        }
-        return true;
-    };
-    if (direction == 'vertical') {
-        index = Math.round(Math.random() * 99);
-        while (
-            index + length * 10 > 100
-        ) {
-            index = Math.round(Math.random() * 99);
-        }
-        cboard.placeShips(index);
-        console.log(index);
-        for (let i = 1; i < length; i++) {
-            cboard.placeShips(index + i * 10);
-        }
-    }
-    if (direction == 'horizontal') {
-    }
-    return index;
-};
 const randomDir = () => {
     if (Math.random() > 0.5) {
         return 'vertical';
@@ -55,50 +28,28 @@ const randomDir = () => {
         return 'horizontal';
     }
 };
+
 const displayGame = (playerName, playerBoard) => {
     const goBackButton = document.createElement('div');
     goBackButton.textContent = 'To main menu';
     header.appendChild(goBackButton);
     goBackButton.addEventListener('click', toHomepage);
     const player = playerFactory(playerName);
+    player.turn = true;
     const computer = computerFactory();
     const computerBoard = gameboardFactory();
-    player.turn = true;
-    let carrierCords = placeShipsRandomly(computerBoard, 5, 'vertical');
-    donotAllowShips(
-        computerBoard,
-        carrierCords,
-        [-10, -9, -11, -1],
-        [0, 10, 20, 30, 40, 49, 50, 51, 39, 41, 29, 31, 19, 21, 11, 9, 1],
-        'vertical'
-    );
-    let battleshipCords = placeShipsRandomly(computerBoard, 4, 'vertical');
-    donotAllowShips(
-        computerBoard,
-        battleshipCords,
-        [-10, -9, -11, -1],
-        [0, 10, 20, 30, 40, 39, 41, 29, 31, 19, 21, 11, 9, 1],
-        'vertical'
-    );
+    let direction;
+    direction = randomDir();
+    placeShipsRandomly(computerBoard, 5, direction);
+    direction = randomDir();
+    placeShipsRandomly(computerBoard, 4, direction);
     for (let i = 0; i < 3; i++) {
-        let cruiserCords = placeShipsRandomly(computerBoard, 3, 'vertical');
-        donotAllowShips(
-            computerBoard,
-            cruiserCords,
-            [-10, -9, -11, -1],
-            [0, 10, 20, 30, 29, 31, 19, 21, 11, 9, 1],
-            'vertical'
-        );
+        direction = randomDir();
+        placeShipsRandomly(computerBoard, 3, direction);
     }
-    for (let i = 0; i < 4; i++) {
-        let destroyerCords = placeShipsRandomly(computerBoard, 2, 'vertical');
-        donotAllowShips(
-            computerBoard,
-            destroyerCords,
-            [-10, -9, -11, -1],
-            [0, 10, 20, 19, 21, 11, 9, 1],
-            'vertical'
-        );
+    for (let i = 0; i < 2; i++) {
+        direction = randomDir();
+        placeShipsRandomly(computerBoard, 2, direction);
     }
 
     gameInterface.textContent = '';

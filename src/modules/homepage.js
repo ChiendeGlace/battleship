@@ -115,7 +115,8 @@ const createHomepage = async () => {
             battleshipCords,
             [-1, -10, -11, -9, -8, -7, -6],
             [4, 9, 10, 11, 12, 13, 14, 0, 1, 2, 3],
-            'horizontal'
+            'horizontal',
+            4
         );
     }
     gameInterface.textContent = '';
@@ -146,7 +147,8 @@ const createHomepage = async () => {
                 cruiserCords,
                 [-1, -10, -11, -9, -8, -7],
                 [9, 10, 11, 12, 13, 0, 1, 2, 3],
-                'horizontal'
+                'horizontal',
+                3
             );
         }
         gameInterface.textContent = '';
@@ -154,7 +156,7 @@ const createHomepage = async () => {
         gameInterface.appendChild(updatePlayerBoard(playerBoard));
     }
     let destroyerCords;
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 2; i++) {
         shipPlacementGuide.textContent = 'Place your destroyers';
         destroyerCords = await placeShipHomepage(playerBoard, 2, direction);
         playerBoard.placeShips(destroyerCords);
@@ -174,7 +176,8 @@ const createHomepage = async () => {
                 destroyerCords,
                 [-1, -10, -11, -9, -8],
                 [9, 10, 11, 12, 0, 1, 2],
-                'horizontal'
+                'horizontal',
+                2
             );
         }
         gameInterface.textContent = '';
