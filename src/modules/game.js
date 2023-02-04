@@ -116,9 +116,14 @@ export const startGame = async (
             const getRandomCords = () => {
                 return new Promise(function (resolve, reject) {
                     setTimeout(() => {
-                        resolve(
-                            Math.floor(Math.random() * possibleCords.length)
-                        );
+                        let index = Math.floor(Math.random() * 100);
+                        while (
+                            possibleCords.filter((cord) => cord == index) ==
+                            false
+                        ) {
+                            index = Math.floor(Math.random() * 100);
+                        }
+                        resolve(index);
                     }, 2500);
                 });
             };

@@ -1,5 +1,22 @@
 import { direction } from './homepage';
 
+const conditionsMet = (index, direction) => {
+    if (direction == 'vertical') {
+        for (let i = 0; i < length; i++) {
+            if (cboard.board[index + i * 10].canHaveShip == false) {
+                return false;
+            }
+        }
+    } else if (direction == 'horizontal') {
+        for (let i = 0; i < length; i++) {
+            if (cboard.board[index + i].canHaveShip == false) {
+                return false;
+            }
+        }
+    }
+    return true;
+};
+
 const placeShipHomepage = (playerBoard, length) => {
     return new Promise(function (resolve, reject) {
         let shipDirection = direction;
@@ -85,25 +102,25 @@ const placeShipHomepage = (playerBoard, length) => {
                         });
                     }
                 }
+                square.addEventListener('click', (e) => {
+                    if (
+                        direction == 'vertical' &&
+                        playerBoard.board[i + (length - 1) * 10].canHaveShip &&
+                        i + (length - 1) * 10 < 100
+                    ) {
+                        resolve(i);
+                    } else if (
+                        ((direction == 'horizontal' &&
+                            i < 9 &&
+                            i + length - 1 < 10) ||
+                            i > 9) &&
+                        playerBoard.board[i + length - 1].canHaveShip &&
+                        i + (length - 1) < i.toString().split('')[0] * 10 + 10
+                    ) {
+                        resolve(i);
+                    }
+                });
             }
-            square.addEventListener('click', (e) => {
-                if (
-                    direction == 'vertical' &&
-                    playerBoard.board[i + (length - 1) * 10].canHaveShip &&
-                    i + (length - 1) * 10 < 100
-                ) {
-                    resolve(i);
-                } else if (
-                    ((direction == 'horizontal' &&
-                        i < 9 &&
-                        i + length - 1 < 10) ||
-                        i > 9) &&
-                    playerBoard.board[i + length - 1].canHaveShip &&
-                    i + (length - 1) < i.toString().split('')[0] * 10 + 10
-                ) {
-                    resolve(i);
-                }
-            });
         }
     });
 };

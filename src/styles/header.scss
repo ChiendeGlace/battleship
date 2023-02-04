@@ -6,12 +6,13 @@ header {
     h1 {
         font-size: 3rem;
         color: white;
+        font-family: 'Oswald', sans-serif;
     }
-    div {
-        background-color: gray;
+    button {
         position: absolute;
         text-align: center;
-        padding: 1em 2em;
+        font-size: 16px;
+        padding: 0.25em 1em;
         cursor: pointer;
         right: 3em;
     }

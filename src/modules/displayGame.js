@@ -30,7 +30,7 @@ const randomDir = () => {
 };
 
 const displayGame = (playerName, playerBoard) => {
-    const goBackButton = document.createElement('div');
+    const goBackButton = document.createElement('button');
     goBackButton.textContent = 'To main menu';
     header.appendChild(goBackButton);
     goBackButton.addEventListener('click', toHomepage);
@@ -51,6 +51,7 @@ const displayGame = (playerName, playerBoard) => {
         direction = randomDir();
         placeShipsRandomly(computerBoard, 2, direction);
     }
+
 
     gameInterface.textContent = '';
     gameInfo.classList.remove('homepage-info');

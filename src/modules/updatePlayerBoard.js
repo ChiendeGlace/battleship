@@ -15,7 +15,7 @@ const updatePlayerBoard = (playerBoard) => {
             square.style.backgroundColor = 'red';
         }
         if (playerBoard.board[i].isMissed) {
-            square.style.backgroundColor = 'lightgray';
+            square.style.backgroundColor = 'white';
         }
         playerBoardInterface.appendChild(square);
     }

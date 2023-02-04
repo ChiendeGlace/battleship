@@ -11,10 +11,10 @@ const updateComputerBoard = (computerBoard, computer, player) => {
         square.classList.add('square');
         square.setAttribute('id', i);
         if (computerBoard.board[i].isHit) {
-            square.textContent = 'hit';
+            square.style.backgroundColor = 'red';
         }
         if (computerBoard.board[i].isMissed) {
-            square.textContent = 'miss';
+            square.style.backgroundColor = 'white';
         }
         computerBoardInterface.appendChild(square);
     }

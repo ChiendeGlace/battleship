@@ -1,5 +1,4 @@
 import displayGame from './displayGame';
-import startGame from './game';
 import gameboardFactory from './gameboard';
 import updatePlayerBoard from './updatePlayerBoard';
 import placeShipHomepage from './placingShips';
@@ -11,6 +10,7 @@ const gameInfo = document.querySelector('.info');
 
 const createHomepage = async () => {
     const directionChange = document.createElement('button');
+    directionChange.classList.add('direction');
     directionChange.textContent = 'Rotate the ship';
     const playerForm = document.createElement('form');
     const playerFormLabel = document.createElement('label');
@@ -57,6 +57,7 @@ const createHomepage = async () => {
     };
     directionChange.addEventListener('click', changeDirection);
     const shipPlacementGuide = document.createElement('h3');
+    shipPlacementGuide.classList.add('ship-guide');
     shipPlacementGuide.textContent = 'Place your carrier';
     gameInterface.append(shipPlacementGuide, directionChange);
     gameInterface.appendChild(updatePlayerBoard(playerBoard));
@@ -186,7 +187,9 @@ const createHomepage = async () => {
         }
         gameInterface.appendChild(updatePlayerBoard(playerBoard));
     }
-
+    
+    gameInterface.textContent = '';
+    gameInterface.appendChild(updatePlayerBoard(playerBoard));
     gameInfo.appendChild(playerForm);
     const runGame = (e) => {
         e.preventDefault();

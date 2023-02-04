@@ -32,8 +32,17 @@ export const placeShipsRandomly = (cboard, length, direction) => {
     }
     if (direction == 'horizontal') {
         index = Math.round(Math.random() * 99);
+        const condition2 = (index, length) => {
+            if (index < 9) {
+                if (index + (length - 1) >= 10) {
+                    return false;
+                }
+            }
+            return true;
+        };
         while (
             index + (length - 1) >= index.toString().split('')[0] * 10 + 10 ||
+            condition2 == false ||
             conditionsMet(index, 'horizontal') == false
         ) {
             index = Math.round(Math.random() * 99);
