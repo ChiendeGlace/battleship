@@ -1,3 +1,5 @@
+import { countHorizontalShips, countVerticalShips } from './shipsCount';
+
 const updateInformation = (playerName, playerBoard, computerBoard, message) => {
     const gameInfo = document.createElement('div');
     const playerInfo = document.createElement('div');
@@ -12,7 +14,10 @@ const updateInformation = (playerName, playerBoard, computerBoard, message) => {
             pShipsCount += 1;
         }
     }
-    pShipsLeft.textContent = 'Ships left: ' + pShipsCount;
+    pShipsLeft.textContent =
+        'Ships left: ' +
+        (countVerticalShips(playerBoard).shipsCount +
+            countHorizontalShips(playerBoard).shipsCount);
     const pName = document.createElement('h3');
     pName.textContent = playerName;
     playerInfo.append(pName, pShipsLeft);
@@ -28,7 +33,10 @@ const updateInformation = (playerName, playerBoard, computerBoard, message) => {
             cShipsCount += 1;
         }
     }
-    cShipsLeft.textContent = 'Ships left: ' + cShipsCount;
+    cShipsLeft.textContent =
+        'Ships left: ' +
+        (countVerticalShips(computerBoard).shipsCount +
+            countHorizontalShips(computerBoard).shipsCount);
     const cName = document.createElement('h3');
     cName.textContent = 'Computer';
     computerInfo.append(cName, cShipsLeft);

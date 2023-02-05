@@ -40,16 +40,16 @@ const displayGame = (playerName, playerBoard) => {
     const computerBoard = gameboardFactory();
     let direction;
     direction = randomDir();
-    placeShipsRandomly(computerBoard, 5, direction);
+    placeShipsRandomly(computerBoard, 5, 'horizontal');
     direction = randomDir();
-    placeShipsRandomly(computerBoard, 4, direction);
+    placeShipsRandomly(computerBoard, 4, 'horizontal');
     for (let i = 0; i < 3; i++) {
         direction = randomDir();
-        placeShipsRandomly(computerBoard, 3, direction);
+        placeShipsRandomly(computerBoard, 3, 'horizontal');
     }
     for (let i = 0; i < 2; i++) {
         direction = randomDir();
-        placeShipsRandomly(computerBoard, 2, direction);
+        placeShipsRandomly(computerBoard, 2, 'horizontal');
     }
 
 

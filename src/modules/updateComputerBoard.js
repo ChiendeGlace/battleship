@@ -1,4 +1,4 @@
-const updateComputerBoard = (computerBoard, computer, player) => {
+const updateComputerBoard = (computerBoard) => {
     const computerBoardInterface = document.createElement('div');
     computerBoardInterface.classList.add('computer-board');
     for (let i = 0; i < 100; i++) {

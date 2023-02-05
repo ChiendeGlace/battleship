@@ -104,18 +104,17 @@ const placeShipHomepage = (playerBoard, length) => {
                 }
                 square.addEventListener('click', (e) => {
                     if (
-                        direction == 'vertical' &&
-                        playerBoard.board[i + (length - 1) * 10].canHaveShip &&
-                        i + (length - 1) * 10 < 100
+                        ((i < 9 && i + length - 1 < 10) || i > 9) &&
+                        playerBoard.board[i + length - 1].canHaveShip &&
+                        i + (length - 1) <
+                            i.toString().split('')[0] * 10 + 10 &&
+                        direction == 'horizontal'
                     ) {
                         resolve(i);
                     } else if (
-                        ((direction == 'horizontal' &&
-                            i < 9 &&
-                            i + length - 1 < 10) ||
-                            i > 9) &&
-                        playerBoard.board[i + length - 1].canHaveShip &&
-                        i + (length - 1) < i.toString().split('')[0] * 10 + 10
+                        direction == 'vertical' &&
+                        playerBoard.board[i + (length - 1) * 10].canHaveShip &&
+                        i + (length - 1) * 10 < 100
                     ) {
                         resolve(i);
                     }
